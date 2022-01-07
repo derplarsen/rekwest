@@ -1,5 +1,5 @@
 # Rekwest
-Request resources from shared kafka cluster owners
+Request resources from shared kafka cluster owners and get some guidance and/or templates to start coding with more quickly and with built with best practices in mind.
 
 # How to run it 
 1. Install node.js & npm
