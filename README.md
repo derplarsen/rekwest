@@ -1,7 +1,7 @@
 # Rekwest
 Request resources from shared kafka cluster owners
 
-# How to run it - 
+# How to run it 
 1. Install node.js & npm
 2. Enter cloned repo directory
 3. Edit key/secret/bootstrap of your Confluent Cloud cluster in **server.js**
