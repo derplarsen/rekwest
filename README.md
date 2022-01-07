@@ -14,8 +14,8 @@ Visit this URL to view existing requests: http://localhost:3333/getRequests.html
 
 # TODO
 
-Make recommendations
-Create scaffolding templates dynamically based on chosen entries
-Add dynamically visible freeform textarea when "Other" connector option is chosen
-Document REST endpoints
-Please submit ideas/bugs into Issues, at this point I had only spent a few hours on it, pull requests are welcome
+- Make recommendations
+- Create scaffolding templates dynamically based on chosen entries
+- Add dynamically visible freeform textarea when "Other" connector option is chosen
+- Document REST endpoints
+- Please submit ideas/bugs into Issues, at this point I had only spent a few hours on it, pull requests are welcome
