@@ -1,0 +1,58 @@
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/resreq.css">
+  <!-- <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet"> -->
+  <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+
+  <title>Kafka Resource Requests Queue</title>
+</head>
+<body>
+  <div class="container maincontainer" align="center" width="800px">
+    <h1>Kafka Resource Requests</h1>
+    <hr>
+    <table class="table">
+      <thead>
+        <tr id="headerRow">
+          <th></th><th>Team</th><th>Name</th><th>Cluster</th><th>Clients</th><th>Msg Size</th><th>Security</th><th>Resiliency</th><th>#Topics</th>
+        </tr>
+      </thead>
+      <tbody id="bodyRow">
+      </tbody>
+    </table>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready( () => {
+      $.get( "/getRequests", function(data) {
+        console.log('data',data)
+
+        data.forEach(function(datum) {
+          console.log('datum',datum);
+          var clientsDetail='';
+          clientsDetail+=datum.clients;
+          clientsDetail+=clientsDetail+', '+datum.connectors;
+          var msgSize='avg: '+datum.avgMsgSize+', max:'+datum.maxMsgSize;
+          var topicDetails=JSON.stringify(datum.topicDetails);
+
+          $( "#bodyRow" )
+            .append( "<tr>" )
+            .append( "<td><a href='/getRequest.html?id="+datum.id+"' target='_blank'>View</a></td>" )
+            .append( "<td>"+datum.team_name+"</td>" )
+            .append( "<td><a href='mailto:"+datum.submitter_name+"<"+datum.submitter_email+">'>"+datum.submitter_name+"</a></td>" )
+            .append( "<td>"+datum.cluster_name+"</td>" )
+            .append( "<td>"+clientsDetail+"</td>" )
+            .append( "<td>"+msgSize+"</td>" )
+            .append( "<td>"+datum.topicDetailACLreqs+"</td>" )
+            .append( "<td>"+datum.tierChoice+"</td>" )
+            .append( "<td><a href='/getRequest.html?id="+datum.id+"'>"+datum.topicDetails.length+"</a></td>" )
+            .append( "</tr>" );
+          });
+
+        })
+    })
+  </script>
+</body>
+</html>

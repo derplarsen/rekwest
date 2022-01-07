@@ -1,0 +1,184 @@
+.inputtext {
+  margin: 5px;
+  display: inline-flex;
+  padding: 3px;
+  max-width: 150px
+}
+
+.maincontainer {
+    padding: 20px;
+    margin: 20px;
+    margin-bottom: 0px;
+}
+
+.clientschecks {
+  margin-right: 20px;
+}
+
+.topicdetailstable {
+  max-width: 800px;
+  background-color: #D3D3D3;
+}
+
+.topicDetails {
+  margin: 10px;
+  padding: 10px;
+}
+
+.topicheader {
+  background-color: lightgray;
+}
+
+.msgSizes {
+  margin: 5px;
+  width: 100px;
+  display: inline-flex;
+}
+
+.topicContent {
+  background-color: lightgray;
+  border:  1px solid black;
+}
+
+.topicsContainerBigger {
+  width: 600px;
+}
+
+.topictab {
+  border:  1px solid black;
+  border-bottom: none;
+  padding: 5px
+}
+
+.librarytext {
+  background-color: lightgray;
+  max-width: 400px;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 5px
+}
+
+.throughputProfileBtn {
+  padding: 3px;
+  margin: 2px;
+}
+
+textarea {
+  max-width: 400px;
+}
+
+.spothertextarea {
+  margin: 10px;
+  min-height: 120px;
+}
+
+.topicdetailstable tr {
+  border-top:  1px solid black;
+}
+
+.connectordesc {
+  margin-top: 5px;
+  font-size: 10pt;
+}
+
+ .consumerOptionsContainer {
+   width: 500px;
+   border:  1px solid black;
+   margin: 10px;
+   padding: 10px;
+   background-color: #F0F0F0;
+ }
+
+ .producerOptionsContainer {
+   width: 500px;
+   border:  1px solid black;
+   margin: 10px;
+   padding: 10px;
+   background-color: #DCDCDC;
+ }
+
+ .headercard {
+   width: 500px;
+ }
+
+ .requestHeaderTable {
+   width: 100%;
+   font-size: 10pt;
+ }
+
+ .requestHeaderTable td {
+   padding: 10px;
+ }
+
+ .writtenout {
+   display: inline-flex;
+   background-color: #F4F4F4;
+   min-width: 300px;
+   margin: 10px;
+   padding-left: 4px;
+   padding: 10px;
+   font-size: 9pt;
+   border-radius: 3px;
+ }
+
+ .writtenout_label {
+   margin: 10px;
+   font-size: 10pt;
+ }
+
+ .usecaseinfo {
+   padding: 5px;
+   margin: 10px;
+ }
+
+ .usecasedeets {
+   font-size: 11pt;
+   color: gray;
+   padding-left: 20px;
+ }
+
+ .topicdeets {
+   max-width: 800px;
+   margin-bottom: 20px;
+ }
+
+ .maindeetscontainer {
+   max-width: 1200px;
+ }
+
+ .topiccolumn {
+   border: 1px solid #A9A9A9;
+   border-radius: 5px;
+   font-size: 11pt;
+   padding: 15px;
+   background-color: #E5E4E2;
+   position: relative;
+   margin: 3px;
+   min-width: 200px;
+ }
+
+ .collabels {
+   font-size: 9pt;
+   font-weight: bold;
+ }
+
+ .createlink {
+   top: 0px;
+   right: 0px;
+   position: absolute;
+   padding: 4px;
+   font-size: 8pt;
+ }
+
+ .pretopiccreate {
+   width: 500px;
+   min-height: 300px;
+   border: 3px solid #A9A9A9;
+   border-radius: 6px;
+   position: absolute;
+   top: 30%;
+   right: 40%;
+   z-index: 2;
+   background-color: #B6D0E2;
+   padding: 20px
+ }

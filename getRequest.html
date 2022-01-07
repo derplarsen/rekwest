@@ -1,0 +1,254 @@
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/resreq.css">
+  <!-- <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet"> -->
+  <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+
+  <title>Kafka Resource Request</title>
+</head>
+<body>
+  <div class="container maincontainer" align="center" width="800px">
+    <h1>Kafka Resource Request:</h1>
+    <hr>
+    <h2 id="teamnamereqdate"></h2>
+    <div id="requestHeader" class="container">
+        <div class="row">
+          <div class="col">
+            <div class="headercard">
+               <table class="table-striped requestHeaderTable">
+                 <tr>
+                   <td class="collabels">Submitter Name:</td>
+                   <td id="submittername"></td>
+                   <td class="collabels">Submitter Phone:</td>
+                   <td id="submitterphone"></td>
+                 </tr>
+                 <tr>
+                   <td class="collabels">Cluster Name:</td>
+                   <td id="appname"></td>
+                   <td class="collabels">Tier Level:</td>
+                   <td id="tierchoice"></td>
+                 </tr>
+                 <tr>
+                   <td class="collabels">Dupe Tolerance:</td>
+                   <td id="dupeTolerable"></td>
+                   <td class="collabels">Loss Tolerance:</td>
+                   <td id="lossTolerable"></td>
+                 </tr>
+               </table>
+               <p class="usecaseinfo" align="left"><u>Use Case Details</u>:<div  align="left" id="usecasedetails" class="usecasedeets"></div></p>
+               <div class="container">
+                <div class="row">
+                  <div class="col writtenout_label">Error Handling: </div>
+                  <div class="col"><div id="errorhandling" class="writtenout"></div></div>
+                  <div class="w-100"></div>
+                  <div class="col writtenout_label">Security Needs: </div>
+                  <div class="col"><div id="securityneeds"  class="writtenout"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="headercard">
+               <table class="table-striped requestHeaderTable">
+                 <tr>
+                   <td class="collabels">Consumer DC Isolation:</td>
+                   <td id="consumerdciso"></td>
+                   <td class="collabels">Consumer DC(s):</td>
+                   <td id="consumerdcs"></td>
+                 </tr>
+                 <tr>
+                   <td class="collabels">Consumer Commit Style:</td>
+                   <td id="consumercommitstyle"></td>
+                   <td class="collabels">Performance Profile:</td>
+                   <td id="perfprofile"></td>
+                 </tr>
+               </table>
+               <br>
+              <h4>Clients:</h4>
+              <div id='appclients'>
+
+              </div>
+              <br>
+              <h4>Connectors:</h4>
+              <div id='appconnectors'>
+              </div>
+              <br>
+              <h4>Stream Processing:</h4>
+              <div id='streamprocs'>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+    <div align="center" class="maindeetscontainer">
+      <h2>Topics</h2>
+      <div class="container topicdeets" align="center">
+        <div class="row" id="requestTopicDetails">
+      </div>
+    </div>
+    <div align="center" class="pretopiccreate shadow-lg  rounded" id="pretopiccreate" style="display: none;">
+      <a href="#" class="createlink" id="cancelcreate">Cancel</a>
+      <h2>You're about to create this topic: </h2>
+      <div class="container topicdeetsprecreate" align="center">blah blah blah <br>blah blah blah <br>blah blah blah <br>blah blah blah <br>blah blah blah <br>blah blah blah <br></div>
+      <br>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready( () => {
+      var queryString = location.search
+      let params = new URLSearchParams(queryString)
+      // example of retrieving 'id' parameter
+      let requestId = params.get("id")
+      $.get( "/getRequest?id="+requestId, function(data) {
+        console.log('data',data)
+        data.reqsubmitdate='12/18/2021'
+        var teamnamereqate = '<font size="+3"><b>'+ data.team_name + '</b></font> &nbsp; - &nbsp; ' +'<font size="+2">'+ data.reqsubmitdate+'<br></font><br>';
+
+        $("#teamnamereqdate").html(teamnamereqate);
+        $("#submittername").html("<a href='mailto:"+data.submitter_email+"'>"+data.submitter_name+"</a>");
+        $("#submitterphone").html(data.submitter_phone);
+        $("#appname").html(data.cluster_name);
+        $("#tierchoice").html(data.tierChoice);
+        $("#usecasedetails").html(data.usecaseNotes);
+        $("#dupeTolerable").html(data.dupeTolerable);
+        $("#lossTolerable").html(data.lossTolerable);
+        $("#consumerdciso").html(data.consumerDCisolation);
+        $("#consumercommitstyle").html(data.ConsumerCommitStyle);
+        $("#consumerdcs").html(data.consumerDCs);
+        $("#perfprofile").html(data.perfProfile);
+        $("#errorhandling").html(data.errorHandling);
+        $("#securityneeds").html(data.topicDetailACLreqs);
+        var clientCounter = 0;
+        var clientCount = data.clients.length;
+        data.clients.forEach(function(client_name) {
+          clientCounter=clientCounter+1;
+          if (clientCounter==clientCount) {
+            $("#appclients").append(client_name)
+          } else {
+            $("#appclients").append(client_name+", ")
+          }
+        })
+
+        var connectorCounter = 0;
+        var connectorCount = data.connectors.length;
+        data.connectors.forEach(function(connector) {
+          connectorCounter=connectorCounter+1;
+          if (connectorCounter==connectorCount) {
+            $("#appconnectors").append(connector)
+          } else {
+            $("#appconnectors").append(connector+", ")
+          }
+        });
+
+        var streamProcsCounter = 0;
+        var streamprocCount = data.streamProcessors.length;
+        data.streamProcessors.forEach(function(streamprocr) {
+
+          streamProcsCounter=streamProcsCounter+1;
+          console.log('streamProcsCounter',streamProcsCounter, 'streamprocCount', streamprocCount);
+          if (streamProcsCounter==streamprocCount) {
+
+            if (streamprocr === 'OtherSP') {
+              $("#streamprocs").append("Other - ("+data.spotherdesc+")")
+            } else {
+              $("#streamprocs").append(streamprocr)
+            }
+          } else {
+            if (streamprocr === 'OtherSP') {
+              $("#streamprocs").append("Other - ("+data.spotherdesc+"), ")
+            } else {
+              $("#streamprocs").append(streamprocr+", ")
+            }
+
+          }
+        })
+
+        var topicCounter = 0;
+        var topicCount = data.topicDetails.length;
+        data.topicDetails.forEach(function(topic) {
+          topicCounter=topicCounter+1;
+
+          $('#requestTopicDetails').append('<div class="col topiccolumn" id="topiccolumn'+topicCounter+'"><div id="topic'+topicCounter+'" class="topiccard"></div><a href="#" class="createlink" id="createtopic'+topicCounter+'" topic="'+topicCounter+'">Create</a></div>')
+          $('#topic'+topicCounter).append('<p class="topicinfo"><b>Topic Name</b>: <span class="topictocreate">'+topic.topicDetailName+'</span></p>')
+          $('#topic'+topicCounter).append('<p class="topicinfo"><b>Topic Throughput</b>: <span class="topictocreate">'+topic.topicDetailThroughput+'</span></p>');
+          $('#topic'+topicCounter).append('<p class="topicinfo"><b>Topic Retention</b>: <span class="topictocreate">'+topic.topicDetailRetention+'</span></p>');
+          $('#topic'+topicCounter).append('<p class="topicinfo"><b># Parallel Consumers</b>: <span class="topictocreate">'+topic.topicDetailNumConsumers+'</span></p>');
+          $('#topic'+topicCounter).append('<p class="topicinfo"><b>Workload Profile</b>: <span class="topictocreate">'+topic.workloadProfile+'</span></p>');
+
+          var topicToCreate={};
+
+          $("#createtopic"+topicCounter).click(function () {
+            console.log('this topic id',$(this).attr('topic'))
+            var clickedTopicId=parseInt($(this).attr('topic'));
+            topicToCreate=data.topicDetails[clickedTopicId-1]
+
+            console.log('topicToCreate',topicToCreate);
+
+             $("#pretopiccreate").clone()
+             .attr('id', 'pretopiccreatenew')
+             .appendTo(".maincontainer");
+             $("#pretopiccreatenew").css('z-index',3);
+             $("#pretopiccreatenew").show();
+
+            $("#pretopiccreatenew").html($("#topic"+$(this).attr('topic')).html());
+            $("#pretopiccreatenew").prepend('<h2>Topic to Create:</h2>');
+            $("#pretopiccreatenew").prepend('<br>')
+            $("#pretopiccreatenew").append('<p class="topicinfo"><b># Partitions</b>: <input class="form-control" type="text" id="partitioncount" style="width: 50px; display: inline-flex;"></input></p>');
+            $("#pretopiccreatenew").append('<input type="hidden" id="requestid" name="requestid" visibility="hidden" value="'+data.id+'"></input>');
+            $("#pretopiccreatenew").append('<span type="button" class="btn btn-primary" id="createtopic" size="10">Create</span>');
+
+            $("#cancelcreate").clone()
+            .attr('id', 'cancelcreatenew')
+            .appendTo("#pretopiccreatenew");
+
+
+            $("#cancelcreatenew").click(function () {
+              $("#pretopiccreatenew").remove();
+            })
+
+            $("#createtopic").click(function() {
+              topicToCreate.partitionCount=$("#partitioncount").val();
+              topicToCreate.requestId=$("#requestid").val();
+
+              $.ajax({
+                  type: "POST",
+                  url: "/createTopic",
+                  async: true,
+                  data: {
+                      params: JSON.stringify(topicToCreate)
+                  },
+                  success: function(response) {
+                    $("#pretopiccreatenew").html("<br><br><br><br>"+response+"<br><br><span class='btn btn-success' id='createdTopicClose'>Close</span>");
+
+                    $('#createdTopicClose').click(function() {
+                      $("#pretopiccreatenew").remove();
+                    });
+
+                    $('#topiccolumn'+clickedTopicId).css('background-color','lightgreen');
+                    $('#createtopic'+clickedTopicId).remove();
+                    var createdtimestamp=new Date();
+                    topicToCreate.createdts=createdtimestamp;
+                  }
+              });
+
+            })
+
+
+          })
+
+        })
+
+      });
+
+
+
+
+    })
+  </script>
+</body>
+</html>

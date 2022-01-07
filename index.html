@@ -1,0 +1,465 @@
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/resreq.css">
+  <!-- <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet"> -->
+  <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+
+  <title>New Kafka Resource Request</title>
+</head>
+<body>
+  <div class="container maincontainer" align="center" width="600px">
+      <h1>New Kafka Resource Request</h1>
+      <hr>
+    <div id="newRequestInit" class="form-group entry_form"  width="400px">
+      <input type="text" class="form-control textinput inputtext" placeholder="Team Name" id="team_name" name="team_name" style="max-width: 400px;"><br>
+      <input type="text" class="form-control textinput inputtext" placeholder="Submitter Name" id="submitter_name" name="submitter_name">
+      <input type="text" class="form-control textinput inputtext" placeholder="Submitter Title" id="team_name" name="submitter_title"><br>
+      <input type="text" class="form-control textinput inputtext" placeholder="Submitter Phone Number" id="submitter_phone" name="submitter_phone">
+      <input type="text" class="form-control textinput inputtext" placeholder="Submitter Email Address" id="submitter_email" name="submitter_email"><br>
+      <input type="text" class="form-control textinput inputtext" placeholder="Name of Application" id="app_name" name="app_name" style="max-width: 300px"><br>
+      <input type="text" class="form-control textinput inputtext" placeholder="Cluster Requested (EEH, Shared Services, Dhub, etc)" id="cluster_name" name="cluster_name" style="max-width: 300px;">
+      <!-- <textarea name="notes" id="notes" rows="5" cols="40" placeholder="Enter any notes regarding your situation.." style="display: inline-flex;"></textarea> -->
+    </div>
+    <h3>What is this application comprised of?</h3>
+    <div id="newRequestInit2" class="form-group entry_form"  width="200px">
+      <div id="producersconsumers">
+        <div id="clientsSelection">
+          <div id="javaselection">
+            <b>Java:  &nbsp;   &nbsp;   &nbsp; </b>
+            <input class="form-check-input languageselection javaselection producerselection" value="Java Producer" type="checkbox" id="JavaProducerClient" style="display: inline-flex;">
+            <label class="form-check-label clientschecks" for="JavaProducerClient" >
+              Producer
+            </label>
+            <input class="form-check-input  languageselection javaselection consumerselection" value="Java Consumer" type="checkbox" id="JavaConsumerClient" style="display: inline-flex;">
+            <label class="form-check-label clientschecks" for="JavaConsumerClient">
+              Consumer
+            </label>
+            <br><p id="javalibtext" style="display: none;" class="librarytext"> We recommend <a href="google.com">this kafka client library</a> for <b>Java</b>..<br>If you are using another library, please indicate the version below:<br><input type="text" id="Javalibversion" class="form-control textinput inputtext" style="max-width: 300px" placeholder="Kafka Client Library Version"></p>
+          </div>
+          <div id="dotnetselection">
+            <b>.Net:  &nbsp;   &nbsp;  &nbsp; </b>
+            <input class="form-check-input languageselection dotnetselection producerselection" value=".Net Producer" type="checkbox" id="dotNetProducerClient" style="display: inline-flex;">
+            <label class="form-check-label clientschecks" for="dotNetProducerClient">
+              Producer
+            </label>
+            <input class="form-check-input checkboxes languageselection dotnetselection consumerselection" value=".Net Consumer" type="checkbox" id="dotNetConsumerClient" style="display: inline-flex;">
+            <label class="form-check-label clientschecks" for="dotNetConsumerClient">
+              Consumer
+            </label>
+            <br><p id="dotnetlibtext" style="display: none;" class="librarytext"> We recommend <a href="google.com">this kafka client library</a> for <b>.Net</b>..<br>If you are using another library, please indicate the version below:<br><input type="text" id="dotNetlibversion" class="form-control textinput inputtext" style="max-width: 300px"  placeholder="Kafka Client Library Version"></p>
+          </div>
+          <div id="producerOptionsContainer" class="producerOptionsContainer" style="display: none;">
+            <b>Producer Questions:  &nbsp;   &nbsp;  &nbsp; </b>
+            <p>How would you describe the application’s performance profile? Describe in terms of importance between “latency”, “throughput”, “consistency”, and “availability”:</p>
+            <textarea class="form-control producerselection" id="perfProfile" style="display: inline-flex;" rows="3"  cols="15"></textarea>
+            <br><p>Is maintaining message ordering important to the application’s functionality?<br>
+              <input type="checkbox" id="orderingImportant" checked data-toggle="toggle" data-on="Yes" data-off="No" value="orderImportant">
+            </p>
+            <br><p>Is durability highly important?<br>
+              <input type="checkbox" id="lossTolerable" checked data-toggle="toggle" data-on="Yes" data-off="No" ></p>
+            <br><p>How are messages that fail to be delivered handled?<br>
+              <textarea class="form-control producerselection" id="errorHandling" rows="3"  cols="15" style="display: inline-flex;"></textarea>
+            </p>
+          </div>
+          <div id="consumerOptionsContainer" class="consumerOptionsContainer" style="display: none;">
+            <b>Consumer Questions:  &nbsp;   &nbsp;  &nbsp; </b>
+            <p>Explain how offsets are committed? Describe in terms of auto-commit or manual commit after a batch of X records processed.<br>
+              <textarea class="form-control consumerselection" id="ConsumerCommitStyle" style="display: inline-flex;" rows="3"  cols="15"></textarea>
+            </p>
+            <br><p>Are duplicates handled in the consuming application?<br>
+              <input type="checkbox" id="dupeTolerable" checked data-toggle="toggle" data-on="Yes" data-off="No">
+            </p>
+            <br><p>Which datacenter(s) will consuming applications be running in??<br>
+              <textarea class="form-control consumerselection" id="consumerDCs" rows="3"  cols="15" style="display: inline-flex;"></textarea>
+            </p>
+            <br><p>Is isolated-datacenter processing necessary?<br>
+              <input type="checkbox" id="consumerDCisolation" data-toggle="toggle" data-on="Yes" data-off="No">
+            </p>
+          </div>
+        </div>
+        <div>
+          <br><b>Connectors:</b><br>
+          <select multiple style="width: 200px;" id="connectorSelect" valign="top">
+            <option>IBM MQ Source</option>
+            <option>IBM MQ Sink</option>
+            <option>JDBC Source</option>
+            <option>JDBC Sink</option>
+            <option>SingleStore Sink</option>
+            <option>HTTP Sink</option>
+            <option>HDFS Sink</option>
+            <option>Jira Source</option>
+            <option>SQL Server CDC</option>
+            <option>Other</option>
+          </select>
+          <br><p class="connectordesc">(Please visit <a href="http://confluent.io/hub" target="_blank">Confluent Hub</a> to browse for more connectors.)</p>
+        </div>
+        <div id="streamProcessing">
+          <br><b>Stream Processing Framework(s) Used:</b><br>
+          <input value="kstreams" type="checkbox" id="selectKstreams"  data-toggle="toggle" data-on="Yes" data-off="No" class="streamproc">
+          <label class="form-check-label clientschecks" for="selectKstreams">
+            Kafka Streams
+          </label>
+          <input value="ksqlDB" type="checkbox" id="selectksqldb"  data-toggle="toggle" data-on="Yes" data-off="No" class="streamproc">
+          <label class="form-check-label clientschecks" for="selectKstreams">
+            ksqlDB
+          </label>
+          <br><input value="OtherSP" type="checkbox" id="selectSPother"  data-toggle="toggle" data-on="Yes" data-off="No" class="streamproc">
+          <label class="form-check-label clientschecks" for="selectSPother">
+            [Other]
+          </label>
+          <br><textarea id="spotherdesc" class="form-control spothertextarea" style="display: none;" placeholder="Please identify the stream processing framework(s) / Application(s) used for this application that will be leveraging this Kafka deployment"></textarea>
+        </div>
+        <div id="purposeDiv">
+          <br><b>Briefly describe the purpose of the application:</b><br>
+          <textarea name="usecaseNotes" class="form-control" id="usecaseNotes" rows="5" cols="5" placeholder="Enter any notes regarding your application.."></textarea>
+        </div>
+      </div>
+      <div id="msgsizediv">
+        <br><b>How large are the messages (in Kilobytes)?</b><br>
+        Avg (KB): <input class="form-control textinput msgSizes" type="text" id="avgMsgSize" >
+        Max (KB): <input class="form-control textinput msgSizes" type="text" id="maxMsgSize" >
+      </div>
+      <div>
+        <br><b>How many topics do you need?</b>
+        <input class="form-control textinput msgSizes" type="text" id="topicCount">
+      </div>
+      <div class="topicsContainerBigger" id="topicsContainerBigger" style="display: none;">
+        <ul class="nav nav-tabs" id="topicDetails">
+        </ul>
+        <div class="tab-content topicContent" id="topicContent"></div>
+      </div>
+      <div>
+        <br><b>What is the resiliency requirement?</b><br>
+        <select style="width: 300px;" id="tierSelect" valign="top" class="form-control">
+          <option>Tier 0 (Never Down)</option>
+          <option>Tier 1</option>
+          <option>Tier 2</option>
+          <option>Tier 3</option>
+          <option>Tier 4</option>
+        </select>
+      </div>
+      <div>
+        <br><b>What access control requirements do you have?</b><br>
+        <textarea id="topicDetailACLreqs" class="md-textarea form-control" rows="3"></textarea>
+      </div>
+    </div>
+
+    <input type="button" class="btn btn-primary" id="clickme" value="Click">
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready( () => {
+      var requestObj={};
+      requestObj.clients=[];
+
+      $("#selectSPother").change(() => {
+        if ( $('#selectSPother').is(":checked") == true) {
+          $("#spotherdesc").show();
+        }
+        if ( $('#selectSPother').is(":checked") == false) {
+          $("#spotherdesc").hide();
+        }
+      });
+
+      $(".javaselection").click(() => {
+          if ( $('#JavaProducerClient').is(":checked") == true || $('#JavaConsumerClient').is(":checked") == true ) {
+            $("#javalibtext").show();
+          }
+
+          if ( $('#JavaConsumerClient').is(":checked") == false && $('#JavaProducerClient').is(":checked") == false ) {
+            $("#javalibtext").hide();
+          }
+
+          if ( $('#JavaConsumerClient').is(":checked") == false && $('#dotNetConsumerClient').is(":checked") == false ) {
+            $("#consumerOptionsContainer").hide();
+          }
+
+          if ( $('#JavaConsumerClient').is(":checked") == true || $('#dotNetConsumerClient').is(":checked") == true ) {
+            $("#consumerOptionsContainer").show();
+          }
+
+          if ( $('#JavaProducerClient').is(":checked") == true || $('#dotNetProducerClient').is(":checked") == true ) {
+            $("#producerOptionsContainer").show();
+          }
+
+          if ( $('#JavaProducerClient').is(":checked") == false && $('#dotNetProducerClient').is(":checked") == false ) {
+            $("#producerOptionsContainer").hide();
+          }
+
+      });
+
+      $(".dotnetselection").click(() => {
+
+          if ( $('#dotNetProducerClient').is(":checked") == true || $('#dotNetConsumerClient').is(":checked") == true ) {
+            $("#dotnetlibtext").show();
+          }
+
+          if ( $('#dotNetConsumerClient').is(":checked") == false && $('#dotNetProducerClient').is(":checked") == false ) {
+            $("#dotnetlibtext").hide();
+          }
+
+          if ( $('#JavaConsumerClient').is(":checked") == false && $('#dotNetConsumerClient').is(":checked") == false ) {
+            $("#consumerOptionsContainer").hide();
+          }
+
+          if ( $('#JavaConsumerClient').is(":checked") == true || $('#dotNetConsumerClient').is(":checked") == true ) {
+            $("#consumerOptionsContainer").show();
+          }
+
+          if ( $('#JavaProducerClient').is(":checked") == true || $('#dotNetProducerClient').is(":checked") == true ) {
+            $("#producerOptionsContainer").show();
+          }
+
+          if ( $('#JavaProducerClient').is(":checked") == false && $('#dotNetProducerClient').is(":checked") == false ) {
+            $("#producerOptionsContainer").hide();
+          }
+
+      })
+
+      $('#connectorSelect').click(() => {
+
+        $('#connectorSelect option').each(() => {
+          if(this.selected==='Other') {
+            console.log('OTHER chosen!')
+          }
+        })
+
+      })
+
+      $('#mySelect').change(() => {
+        var value = $(this).val();
+      });
+
+      const gatherRequestObj = () => {
+        requestObj.connectors=$('#connectorSelect').val();
+
+        requestObj.clients=[];
+
+        $('.languageselection:input[type=checkbox]').each(function() {
+          if (this.checked) {
+            requestObj.clients.push( $(this).val() );
+          }
+        });
+
+        $('#orderingImportant:input[type=checkbox]').each(function() {
+          if (this.checked) {
+            requestObj.orderingImportant=true;
+          } else {
+            requestObj.orderingImportant=false;
+          }
+        });
+
+        $('#dupeTolerable:input[type=checkbox]').each(function() {
+          if (this.checked) {
+            requestObj.dupeTolerable=true;
+          } else {
+            requestObj.dupeTolerable=false;
+          }
+        });
+
+        $('#lossTolerable:input[type=checkbox]').each(function() {
+          if (this.checked) {
+            requestObj.lossTolerable=true;
+          } else {
+            requestObj.lossTolerable=false;
+          }
+        });
+
+        $('#consumerDCisolation:input[type=checkbox]').each(function() {
+          if (this.checked) {
+            requestObj.consumerDCisolation=true;
+          } else {
+            requestObj.consumerDCisolation=false;
+          }
+        });
+
+        requestObj.streamProcessors = [];
+
+        $('.streamproc:input[type=checkbox]').each(function() {
+          if (this.checked) {
+            requestObj.streamProcessors.push(this.value);
+          }
+        });
+
+        $('input[type=text]').each(function() {
+          requestObj[this.id]=$(this).val();
+        });
+
+        $('textarea').each(function() {
+          //console.log('textarea text this',this)
+          requestObj[this.id]=$(this).val()
+        });
+
+        requestObj.topicDetails=[];
+
+        $('.topicdetailstable').each(function(i, obj) {
+          var topicDetailsObj={};
+          $(this).find("input[type=text]").each(function(i, objchild) {
+            topicDetailsObj[objchild.id]=objchild.value;
+          });
+
+          $(this).find("button[clicked=clicked]").each(function(i, objchild) {
+            topicDetailsObj.workloadProfile=objchild.innerText;
+        });
+
+          requestObj.topicDetails.push(topicDetailsObj)
+
+         })
+
+        requestObj.tierChoice = $('#tierSelect').val();
+        //console.log(requestObj)
+        return requestObj;
+      }
+
+      $("#clickme").click(() => {
+        $.post('/createRequest', gatherRequestObj());
+        console.log(gatherRequestObj())
+      })
+
+
+      $("#avgMsgSize").blur(() => {
+
+        var avgMsgSizeInt=parseInt($("#avgMsgSize").val());
+        console.log('blurred off',avgMsgSizeInt);
+        if (isNaN(avgMsgSizeInt)) {
+          $("#msgsizediv").append('<p style="font-size: 8pt; color: red;" id="errorNumber">Sorry doesnt look like a number</p>');
+          $("#avgMsgSize").css('border','2px solid red')
+        } else {
+          $("#avgMsgSize").css('border','1px solid lightgray');
+          $("#errorNumber").remove();
+          console.log('all good')
+        }
+
+      });
+
+      $("#maxMsgSize").blur(() => {
+
+        var maxMsgSizeInt=parseInt($("#maxMsgSize").val());
+        console.log('blurred off',maxMsgSizeInt);
+        if (isNaN(maxMsgSizeInt)) {
+          $("#msgsizediv").append('<p style="font-size: 8pt; color: red;" id="errorNumber">Sorry doesnt look like a number</p>');
+          $("#maxMsgSize").css('border','2px solid red')
+        } else {
+          $("#maxMsgSize").css('border','1px solid lightgray');
+          $("#errorNumber").remove();
+          console.log('all good')
+        }
+
+      });
+
+      var TopicCntChosen=0;
+      var TopicCntChosenAlready=0;
+      var TopicsBeenGend=false;
+
+      $("#topicCount").blur(() => {
+
+        var counter=1;
+        var topicCount=parseInt($("#topicCount").val());
+
+        if (TopicsBeenGend == false) {
+
+            while (counter <= topicCount) {
+
+              var html='<table class="table topicdetailstable table-borderless">';
+              html+='<tr><td>Desired Name:</td><td><input placeholder="" class="form-control textinput inputtext" type="text" id="topicDetailName"></td></tr>';
+              html+='<tr><td>Expected Throughput:</td><td><input placeholder="5 MBps produce, 15 MBps consume" class="form-control textinput inputtext" type="text" id="topicDetailThroughput"></td></tr>';
+              html+='<tr><td>How would the throughput be characterized?</td><td><button class="throughputProfileBtn btn btn-primary" id="lumpyProfileBtn">Lumpy</button><button class="throughputProfileBtn btn btn-primary" id="steadyProfileBtn">Steady</button><button class="throughputProfileBtn btn btn-primary" id="batchProfileBtn">Batchy</button></td></tr>'
+              html+='<tr><td>Will you key your messages?<br><i>(ie do you require strict ordering)</i></td><td><input type="checkbox" class="bsswitch" id="topicDetailKeying" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger"></td></tr>';
+              html+='<tr><td>How many days would you like to retain the data?<br><i>(Default = 7)</i></td><td><input class="form-control textinput inputtext" placeholder="7" type="text" id="topicDetailRetention" style="width: 40px;"></td></tr>';
+              html+='<tr><td>How many consumer processes will you want to scale out to?<br><i>(Default = 6)</i></td><td><input class="form-control textinput inputtext" placeholder="6" type="text" id="topicDetailNumConsumers" style="width: 40px;"></td></tr>';
+              html+='</table>';
+
+              $("#topicDetails").append('<li class="topictab"><a data-toggle="tab" class="derp" href="#topic'+counter+'" id="topictab'+counter+'">Topic '+counter+'</a></li>')
+              $("#topicContent").append('<div id="topic'+counter+'" class="tab-pane fade topicheader"><h3>Topic '+counter+'</h3>'+html+'</div>')
+
+              $(".bsswitch").bootstrapToggle();
+
+              $(document).on('click', '[data-toggle="tab"]', function() {
+                  console.log($(this));
+                  $(".derp").parent().css("background-color","white")
+                  var myid =$(this).attr("id");
+                  $(this).parent().addClass("active");
+                  console.log('myid',myid);
+                  $(this).parent().css("background-color","lightgray");
+                  return false;
+              });
+
+              $('.throughputProfileBtn').click( function() {
+                  //console.log('clicked')
+                  $('.throughputProfileBtn').css('border','none');
+                  var mytext=$(this).text();
+                  var myid=$(this).attr('id')
+                  $(this).attr('clicked','clicked')
+                  $("#"+myid).css( "border", "2px solid red" );
+              });
+
+              counter++;
+            }
+
+            TopicsBeenGend=true;
+            TopicCntChosenAlready=parseInt(topicCount);
+
+        } else if (topicCount == TopicCntChosenAlready && TopicsBeenGend == true) {
+
+            console.log('topic count same, already been generated, do nothing');
+
+        } else if (topicCount != TopicCntChosenAlready && TopicsBeenGend == true) {
+
+            $("#topicContent").empty();
+            $("#topicDetails").empty();
+
+            //var html='<div id="home" class="tab-pane fade in active topicsContainer"><h3>HOME</h3><p>Some content.</p></div>';
+
+            while (counter <= topicCount) {
+
+              var html='<table class="table topicdetailstable table-borderless">';
+              html+='<tr><td>Desired Name:</td><td><input placeholder="" class="form-control textinput inputtext" type="text" id="topicDetailName"></td></tr>';
+              html+='<tr><td>Expected Throughput:</td><td><input placeholder="5 MBps produce, 15 MBps consume" class="form-control textinput inputtext" type="text" id="topicDetailThroughput"></td></tr>';
+              html+='<tr><td>How would the throughput be characterized?</td><td><button class="throughputProfileBtn btn btn-primary" id="lumpyProfileBtn">Lumpy</button><button class="throughputProfileBtn btn btn-primary" id="steadyProfileBtn">Steady</button><button class="throughputProfileBtn btn btn-primary" id="batchProfileBtn">Batchy</button></td></tr>'
+              html+='<tr><td>Will you key your messages?<br><i>(ie do you require strict ordering)</i></td><td><input type="checkbox" class="bsswitch" id="topicDetailKeying" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger"></td></tr>';
+              html+='<tr><td>How many days would you like to retain the data?<br><i>(Default = 7)</i></td><td><input class="form-control textinput inputtext" placeholder="7" type="text" id="topicDetailRetention" style="width: 40px;"></td></tr>';
+              html+='<tr><td>How many consumer processes will you want to scale out to?<br><i>(Default = 6)</i></td><td><input class="form-control textinput inputtext" placeholder="6" type="text" id="topicDetailNumConsumers" style="width: 40px;"></td></tr>';
+              html+='</table>';
+              $("#topicDetails").append('<li class="topictab"><a data-toggle="tab" class="derp" href="#topic'+counter+'" id="topictab'+counter+'">Topic '+counter+'</a></li>')
+              $("#topicContent").append('<div id="topic'+counter+'" class="tab-pane fade topicheader"><h3>Topic '+counter+'</h3>'+html+'</div>')
+
+              $(".bsswitch").bootstrapToggle();
+
+              $(document).on('click', '[data-toggle="tab"]', function () {
+                  //console.log($(this));
+                  $(".derp").parent().css("background-color","white")
+                  var myid =$(this).attr("id");
+                  $(this).parent().addClass("active");
+                  //console.log('myid',myid);
+                  $(this).parent().css("background-color","lightgray");
+                  return false;
+              });
+
+              $('.throughputProfileBtn').click(function(){
+                  //console.log('clicked')
+                  $('.throughputProfileBtn').css('border','none');
+                  var mytext=$(this).text();
+                  var myid=$(this).attr('id')
+                  $(this).attr('clicked','clicked')
+                  //console.log('mytext after clicked',mytext)
+                  $("#"+myid).css( "border", "2px solid red" );
+              });
+
+              counter++;
+            }
+
+            TopicsBeenGend =true;
+            TopicCntChosenAlready=parseInt(topicCount);
+        }
+
+        $("#topicsContainerBigger").show();
+
+      })
+    })
+
+  </script>
+</body>
+</html>
