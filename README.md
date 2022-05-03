@@ -2,7 +2,7 @@
 Request resources from shared kafka cluster owners and get some guidance and/or templates to start coding with more quickly and with built with best practices in mind.
 
 # Dependencies
-- a kafka / redpanda instance running locally (port 19092 by default, from docker-compose included)
+- a kafka / redpanda instance running locally (port 19092 by default, runs redpanda in docker with docker-compose included)
 
 # How to run it 
 1. Install node.js & npm
