@@ -7,7 +7,7 @@ Request resources from shared kafka cluster owners and get some guidance and/or 
 # How to run it 
 1. Install node.js & npm
 2. Enter cloned repo directory
-3. Edit key/secret/bootstrap of your Confluent Cloud cluster in **server.js**
+3. Edit key/secret/bootstrap in **server.js** (see below)
 4. run `npm start` (this will install all necessary dependencies)
 
 By default it connects to a local instance of kafka/redpanda on port 19092 with no auth. If you want to connect it with SASL_SSL just change the "isLocalKafkaNoAuth" to false and update the login variables above it.
