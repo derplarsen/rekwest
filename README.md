@@ -10,8 +10,10 @@ Request resources from shared kafka cluster owners and get some guidance and/or 
 3. Edit key/secret/bootstrap of your Confluent Cloud cluster in **server.js**
 4. run `npm start` (this will install all necessary dependencies)
 
+By default it connects to a local instance of kafka/redpanda on port 19092 with no auth. If you want to connect it with SASL_SSL just change the "isLocalKafkaNoAuth" to false and update the login variables above it.
+
 # How to interface with it - 
-Visit this URL to add a new request: http://localhost:3333/index.html
+Visit this URL to add a new request: http://localhost:3333/
 
 Visit this URL to view existing requests: http://localhost:3333/getRequests.html
 
