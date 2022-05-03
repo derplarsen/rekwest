@@ -1,6 +1,9 @@
 # Rekwest
 Request resources from shared kafka cluster owners and get some guidance and/or templates to start coding with more quickly and with built with best practices in mind.
 
+# Dependencies
+- a kafka / redpanda instance running locally
+
 # How to run it 
 1. Install node.js & npm
 2. Enter cloned repo directory
